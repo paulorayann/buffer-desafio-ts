@@ -23,7 +23,7 @@ class ClientRepository {
   }
 
   async update(id: string, payload: Request): Promise<IClient> {
-    const result = (await ClientSchema.findByIdAndUpdate(id, payload)) as IClient
+    const result = (await ClientSchema.findByIdAndUpdate(id, payload, {returnOriginal: false})) as IClient
     return result
   }
 }

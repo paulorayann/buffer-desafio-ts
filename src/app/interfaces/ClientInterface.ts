@@ -14,9 +14,4 @@ export interface IClient {
   complement: string,
   neighborhood: string,
   _id?: Types.ObjectId;
-
-
-
-
-
 }

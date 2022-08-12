@@ -6,6 +6,11 @@ class ClientRepository {
     return ClientSchema.create(payload)
   }
 
+  async findAll(): Promise<IClient[]> {
+    const result = (await ClientSchema.find()) as IClient[]
+    return result
+  }
+
   async findById(id: string): Promise<IClient> {
     const result = await ClientSchema.findById(id) as IClient
     return result

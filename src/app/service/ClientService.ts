@@ -7,6 +7,11 @@ class ClientService {
     return result
   }
 
+  async findAll(): Promise<IClient[]> {
+    const result = (await ClientRepository.findAll()) as IClient[]
+    return result
+  }
+
   async findById(id: string): Promise<IClient> {
     const result = await ClientRepository.findById(id) as IClient
     return result

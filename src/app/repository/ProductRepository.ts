@@ -1,7 +1,7 @@
 import { IProduct } from "../interfaces/ProductInterface";
 import ProductSchema from '../schema/ProductSchema'
 
-class ClientRepository {
+class ProductRepository {
   async create(payload: IProduct): Promise<IProduct> {
     return ProductSchema.create(payload)
   }
@@ -28,4 +28,4 @@ class ClientRepository {
   }
 }
 
-export default new ClientRepository
+export default new ProductRepository

@@ -1,7 +1,7 @@
 import { IProduct } from "../interfaces/ProductInterface";
 import ProductRepository from "../repository/ProductRepository";
 
-class ClientService {
+class ProductService {
   async create(payload: IProduct): Promise<IProduct> {
     const result = await ProductRepository.create(payload)
     return result
@@ -28,4 +28,4 @@ class ClientService {
   }
 }
 
-export default new ClientService()
+export default new ProductService()

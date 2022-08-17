@@ -23,7 +23,7 @@ export default async (req: Request, res: Response, next: NextFunction) => {
       .required(),
       birthday: Joi.date().format('DD/MM/YYYY').required(),
       email: Joi.string().email().trim().required(),
-      password: Joi.string().trim().required(),
+      password: Joi.string().trim().min(6).required(),
       cep: Joi.string().trim().required(),
       uf: Joi.string(),
       city: Joi.string(),

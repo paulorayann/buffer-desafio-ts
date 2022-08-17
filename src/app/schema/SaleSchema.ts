@@ -1,21 +1,22 @@
-import mongoose, { Schema } from 'mongoose'
 import {ISale} from '../interfaces/SaleInterface'
+import mongoose, { Schema } from 'mongoose'
+
 
 
 const SaleSchema = new Schema<ISale>({
-  client: { type: Schema.Types.ObjectId, required: true, ref: 'Client._id' },
-  clientCurrency: { type: String, required: true },
-  date: { type: String, required: true },
+  client: { type: Schema.Types.ObjectId, trim: true, required: true, ref: 'Client' },
+  clientCurrency: { type: String, trim: true, required: true },
+  date: { type: Date, trim: true, required: true },
   items: [
     {
-      product: { type: Schema.Types.ObjectId, required: true, ref: 'Product._id' },
-      qtd: { type: Number, required: true },
-      unitValue: { type: Number, required: true },
+      product: { type: Schema.Types.ObjectId, trim: true, required: true, ref: 'Product' },
+      qtd: { type: Number, trim: true, required: true },
+      unitValue: { type: Number, trim: true, required: true },
       _id: false
     },
   ],
   total: { type: Number },
-  totalClient: { type: Number},
+  totalClient: { type: Number },
 })
 
 

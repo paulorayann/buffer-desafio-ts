@@ -3,7 +3,7 @@ import { Types } from 'mongoose'
 export interface ISale {
   client: Types.ObjectId,
   clientCurrency: string,
-  date: string,
+  date: Date,
   // eslint-disable-next-line @typescript-eslint/ban-types
   items: Object[],
   product: Types.ObjectId,

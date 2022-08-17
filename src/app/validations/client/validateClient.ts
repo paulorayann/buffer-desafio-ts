@@ -3,6 +3,7 @@ import JoiImport from 'joi'
 import DateExtension from '@joi/date'
 import cpfValidation from '../../utils/cpfValidation'
 import {cpfValid}  from '../../utils/regex'
+import { cepValid } from '../../utils/regex'
 
 const Joi = JoiImport.extend(DateExtension) as typeof JoiImport
 
@@ -24,7 +25,7 @@ export default async (req: Request, res: Response, next: NextFunction) => {
       birthday: Joi.date().format('DD/MM/YYYY').required(),
       email: Joi.string().email().trim().required(),
       password: Joi.string().trim().min(6).required(),
-      cep: Joi.string().trim().required(),
+      cep: Joi.string().trim().regex(cepValid).message('The CEP field has an invalid format, please try XXXXX-XXX').required(),
       uf: Joi.string(),
       city: Joi.string(),
       address: Joi.string(),

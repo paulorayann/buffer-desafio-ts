@@ -13,8 +13,8 @@ class SaleService {
     return result
   }
 
-  async findAll(): Promise<ISale[]> {
-    const result = (await SaleRepository.findAll()) as ISale[]
+  async findAll(payload): Promise<ISale[]> {
+    const result = (await SaleRepository.findAll(payload)) as ISale[]
     return result
   }
 

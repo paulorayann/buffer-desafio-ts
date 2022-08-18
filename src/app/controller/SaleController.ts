@@ -12,7 +12,7 @@ class SaleController {
 
   async findAll(req, res) {
     try {
-      const result = await SaleService.findAll()
+      const result = await SaleService.findAll(req.query)
       if (result.length === 0) {
         return res.status(404).json({message: "No sale found"})
       }

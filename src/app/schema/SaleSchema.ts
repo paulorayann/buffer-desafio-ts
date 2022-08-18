@@ -1,5 +1,6 @@
 import {ISale} from '../interfaces/SaleInterface'
-import mongoose, { Schema } from 'mongoose'
+import { Schema, model, PaginateModel  } from 'mongoose'
+import mongoosePaginate from 'mongoose-paginate-v2'
 
 
 
@@ -19,6 +20,7 @@ const SaleSchema = new Schema<ISale>({
   totalClient: { type: Number },
 })
 
+SaleSchema.plugin(mongoosePaginate)
 
-const Sale = mongoose.model<ISale>('Sale', SaleSchema)
+const Sale = model<ISale, PaginateModel<ISale>>('Sale', SaleSchema)
 export default Sale

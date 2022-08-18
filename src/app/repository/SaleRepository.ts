@@ -6,9 +6,27 @@ class SaleRepository {
     return SaleSchema.create(payload)
   }
 
-  async findAll(): Promise<ISale[]> {
-    const result = (await SaleSchema.find()) as ISale[]
-    return result
+  async findAll(payload): Promise<ISale[]> {
+    const { limit = 15, page = 0, ...query } = payload
+    const customLabels = {
+      totalDocs: 'totalCount',
+      docs: 'sales',
+      page: 'currentPage',
+      limit: 'pageSize',
+      nextPage: false,
+      prevPage: false,
+      totalPages: 'totalPages',
+      pagingCounter: false,
+      meta: false,
+      hasPrevPage: false,
+      hasNextPage: false
+    }
+    const options = {
+      page: Number(page),
+      limit: Number(limit),
+      customLabels,
+    }
+    return SaleSchema.paginate(query, options) as never as ISale[]
   }
 
   async findById(id: string): Promise<ISale> {

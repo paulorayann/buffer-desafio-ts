@@ -11,11 +11,16 @@ class SaleService {
     if (!validClient) {
       throw new Error(`Client Id '${payload.client}' not found`)
     }
+    
     // Check if product exists
     const validProduct = await ProductRepository.findById(payload.items[0].product as never as string)
     if (!validProduct) {
       throw new Error(`Product Id '${payload.items[0].product}' not found`)
     }
+
+    // Calculates the total price of the sale
+      payload.total = payload.items.reduce((totalPrice, products) => totalPrice + products.unitValue * products.qtd, 0)
+
     // Then create sale
     const result = await SaleRepository.create(payload)
     return result

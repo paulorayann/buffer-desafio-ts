@@ -12,7 +12,8 @@ class ProductController {
 
   async findAll(req, res) {
     try {
-      const result = await ProductService.findAll()
+
+      const result = await ProductService.findAll(req.query)
       if (result.length === 0) {
         return res.status(404).json({message: "No products found"})
       }

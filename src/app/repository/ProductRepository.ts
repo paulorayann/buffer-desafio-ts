@@ -6,9 +6,27 @@ class ProductRepository {
     return ProductSchema.create(payload)
   }
 
-  async findAll(): Promise<IProduct[]> {
-    const result = (await ProductSchema.find()) as IProduct[]
-    return result
+  async findAll(payload): Promise<IProduct[]> {
+    const { limit = 15, page = 0, ...query } = payload
+    const customLabels = {
+      totalDocs: 'totalCount',
+      docs: 'products',
+      page: 'currentPage',
+      limit: 'pageSize',
+      nextPage: false,
+      prevPage: false,
+      totalPages: 'totalPages',
+      pagingCounter: false,
+      meta: false,
+      hasPrevPage: false,
+      hasNextPage: false
+    }
+    const options = {
+      page: Number(page),
+      limit: Number(limit),
+      customLabels,
+    }
+    return ProductSchema.paginate(query, options) as never as IProduct[]
   }
 
   async findById(id: string): Promise<IProduct> {

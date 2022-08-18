@@ -7,8 +7,8 @@ class ProductService {
     return result
   }
 
-  async findAll(): Promise<IProduct[]> {
-    const result = (await ProductRepository.findAll()) as IProduct[]
+  async findAll(payload): Promise<IProduct[]> {
+    const result = await ProductRepository.findAll(payload) as IProduct[]
     return result
   }
 

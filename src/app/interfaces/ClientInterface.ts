@@ -3,7 +3,7 @@ import { Types } from 'mongoose'
 export interface IClient {
   name: string
   cpf: string,
-  birthday: string | Date,
+  birthday: Date,
   email: string,
   password: string,
   cep: string,

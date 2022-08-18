@@ -4,8 +4,13 @@ export interface ISale {
   client: Types.ObjectId,
   clientCurrency: string,
   date: Date,
-  // eslint-disable-next-line @typescript-eslint/ban-types
-  items: Object[],
+  items: [
+    {
+      product: Types.ObjectId,
+      qtd: number,
+      unitValue: number,
+    }
+  ],
   product: Types.ObjectId,
   total: number,
   totalClient: number,

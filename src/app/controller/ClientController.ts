@@ -12,7 +12,7 @@ class ClientController {
 
   async findAll(req, res) {
     try {
-      const result = await ClientService.findAll()
+      const result = await ClientService.findAll(req.query)
       if (result.length === 0) {
         return res.status(404).json({message: "No clients found"})
       }

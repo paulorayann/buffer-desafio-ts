@@ -6,9 +6,27 @@ class ClientRepository {
     return ClientSchema.create(payload)
   }
 
-  async findAll(): Promise<IClient[]> {
-    const result = (await ClientSchema.find()) as IClient[]
-    return result
+  async findAll(payload): Promise<IClient[]> {
+    const { limit = 15, page = 0, ...query } = payload
+    const customLabels = {
+      totalDocs: 'totalCount',
+      docs: 'clients',
+      page: 'currentPage',
+      limit: 'pageSize',
+      nextPage: false,
+      prevPage: false,
+      totalPages: 'totalPages',
+      pagingCounter: false,
+      meta: false,
+      hasPrevPage: false,
+      hasNextPage: false
+    }
+    const options = {
+      page: Number(page),
+      limit: Number(limit),
+      customLabels,
+    }
+    return ClientSchema.paginate(query, options) as never as IClient[]
   }
 
   async findById(id: string): Promise<IClient> {

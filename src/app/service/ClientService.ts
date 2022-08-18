@@ -7,8 +7,8 @@ class ClientService {
     return result
   }
 
-  async findAll(): Promise<IClient[]> {
-    const result = (await ClientRepository.findAll()) as IClient[]
+  async findAll(payload): Promise<IClient[]> {
+    const result = (await ClientRepository.findAll(payload)) as IClient[]
     return result
   }
 

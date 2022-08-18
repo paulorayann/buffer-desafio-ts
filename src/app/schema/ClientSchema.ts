@@ -1,5 +1,6 @@
-import mongoose, { Schema } from 'mongoose'
+import { Schema, model, PaginateModel  } from 'mongoose'
 import { IClient } from '../interfaces/ClientInterface'
+import mongoosePaginate from 'mongoose-paginate-v2'
 import bcryptjs from 'bcryptjs'
 
 
@@ -23,5 +24,7 @@ clientSchema.pre('save', async function pass(next){
   this.password = hash
   next()
 })
-const Client = mongoose.model<IClient>('Client', clientSchema)
+
+clientSchema.plugin(mongoosePaginate)
+const Client = model<IClient, PaginateModel<IClient>>('Client', clientSchema)
 export default Client

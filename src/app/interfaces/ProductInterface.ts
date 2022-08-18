@@ -4,6 +4,6 @@ export interface IProduct {
   name: string,
   category: string,
   currency: string,
-  price: string,
+  price: number,
   _id?: Types.ObjectId;
 }

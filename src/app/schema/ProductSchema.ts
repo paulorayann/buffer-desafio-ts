@@ -7,7 +7,7 @@ const ProductSchema = new Schema<IProduct>({
   name: { type: String, trim: true, required: true },
   category: { type: String, trim: true, required: true },
   currency: { type: String, trim: true, required: true },
-  price: { type: String, trim: true, required: true },
+  price: { type: Number, trim: true, required: true },
 })
 
 ProductSchema.plugin(mongoosePaginate)

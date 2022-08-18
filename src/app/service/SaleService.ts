@@ -2,6 +2,7 @@ import { ISale } from "../interfaces/SaleInterface";
 import SaleRepository from "../repository/SaleRepository";
 import ClientRepository from "../repository/ClientRepository";
 import ProductRepository from "../repository/ProductRepository";
+import CurrencyValue from "../utils/currencyQuoteAPI/CurrencyValue";
 
 
 class SaleService {
@@ -11,7 +12,7 @@ class SaleService {
     if (!validClient) {
       throw new Error(`Client Id '${payload.client}' not found`)
     }
-    
+
     // Check if product exists
     const validProduct = await ProductRepository.findById(payload.items[0].product as never as string)
     if (!validProduct) {
@@ -19,7 +20,11 @@ class SaleService {
     }
 
     // Calculates the total price of the sale
-      payload.total = payload.items.reduce((totalPrice, products) => totalPrice + products.unitValue * products.qtd, 0)
+      payload.total = payload.items.reduce((totalPrice, products) => totalPrice + products.unitValue * products.qtd, 0).toFixed(2) as unknown as number
+
+    // Calculates the total price of the sale in the client currency
+    const productCurrency = await CurrencyValue.getCurrencyValue(validProduct.currency, payload.clientCurrency)
+    payload.totalClient = (payload.total * productCurrency[0].ask).toFixed(2) as unknown as number
 
     // Then create sale
     const result = await SaleRepository.create(payload)

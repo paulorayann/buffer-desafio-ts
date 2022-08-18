@@ -1,14 +1,22 @@
 import { ISale } from "../interfaces/SaleInterface";
 import SaleRepository from "../repository/SaleRepository";
 import ClientRepository from "../repository/ClientRepository";
+import ProductRepository from "../repository/ProductRepository";
+
 
 class SaleService {
   async create( payload: ISale): Promise<ISale> {
-    const validClient = await ClientRepository.findById(payload.client.toString())
+    // Check if client exists
+    const validClient = await ClientRepository.findById(payload.client as never as string)
     if (!validClient) {
-      throw new Error('Client not found')
+      throw new Error(`Client Id '${payload.client}' not found`)
     }
-
+    // Check if product exists
+    const validProduct = await ProductRepository.findById(payload.items[0].product as never as string)
+    if (!validProduct) {
+      throw new Error(`Product Id '${payload.items[0].product}' not found`)
+    }
+    // Then create sale
     const result = await SaleRepository.create(payload)
     return result
   }

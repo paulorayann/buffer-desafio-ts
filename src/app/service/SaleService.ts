@@ -46,8 +46,27 @@ class SaleService {
     return result
   }
 
-  async update(id: string, payload: Request): Promise<ISale> {
-    const result = (await SaleRepository.update(id, payload)) as ISale
+  async update(id: string, payload: ISale): Promise<ISale> {
+        // Check if client exists
+        const validClient = await ClientRepository.findById(payload.client as unknown as string)
+        if (!validClient) {
+          throw new Error(`Client Id '${payload.client}' not found`)
+        }
+    
+        // Check if product exists
+        const validProduct = await ProductRepository.findById(payload.items[0].product as unknown as string)
+        if (!validProduct) {
+          throw new Error(`Product Id '${payload.items[0].product}' not found`)
+        }
+    
+        // Calculates the total price of the sale
+          payload.total = payload.items.reduce((totalPrice, products) => totalPrice + products.unitValue * products.qtd, 0).toFixed(2) as unknown as number
+    
+        // Calculates the total price of the sale in the client currency
+        const productCurrency = await CurrencyValue.getCurrencyValue(validProduct.currency, payload.clientCurrency)
+        payload.totalClient = (payload.total * productCurrency[0].ask).toFixed(2) as unknown as number
+    
+    const result = await SaleRepository.update(id, payload)
     return result
   }
 }

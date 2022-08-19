@@ -40,7 +40,7 @@ class SaleRepository {
     return result
   }
 
-  async update(id: string, payload: Request): Promise<ISale> {
+  async update(id: string, payload: ISale): Promise<ISale> {
     const result = (await SaleSchema.findByIdAndUpdate(id, payload, {returnOriginal: false})) as ISale
     return result
   }

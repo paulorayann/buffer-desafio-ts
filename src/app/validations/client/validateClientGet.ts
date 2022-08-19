@@ -1,7 +1,6 @@
 import { Request, Response, NextFunction } from 'express'
 import JoiImport from 'joi'
 import DateExtension from '@joi/date'
-import cpfValidation from '../../utils/cpfValidation'
 import {cpfValid}  from '../../utils/regex'
 import { cepValid } from '../../utils/regex'
 
@@ -16,12 +15,7 @@ export default async (req: Request, res: Response, next: NextFunction) => {
       .min(14)
       .max(14)
       .regex(cpfValid)
-      .message('The CPF field has an invalid format, please try XXX.XXX.XXX-XX and use numbers only')
-      .custom((cpf) => {
-        if (!cpfValidation(cpf)) throw Error('Please enter a valid CPF')
-        return req.body
-      })
-      ,
+      .message('The CPF field has an invalid format, please try XXX.XXX.XXX-XX and use numbers only'),
       birthday: Joi.date().format('DD/MM/YYYY'),
       email: Joi.string().email().trim(),
       password: Joi.string().trim().min(6),
@@ -34,7 +28,7 @@ export default async (req: Request, res: Response, next: NextFunction) => {
       neighborhood: Joi.string(),
     });
 
-    const { error } = await client.validate(req.body, {abortEarly: false})
+    const { error } = await client.validate(req.query, {abortEarly: false})
 
     if (error) throw error
 

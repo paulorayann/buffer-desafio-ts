@@ -13,7 +13,7 @@ export default async (req: Request, res: Response, next: NextFunction) => {
       name: Joi.string().trim().required(),
       cpf: Joi.string()
       .trim()
-      .min(11)
+      .min(14)
       .max(14)
       .regex(cpfValid)
       .message('The CPF field has an invalid format, please try XXX.XXX.XXX-XX and use numbers only')

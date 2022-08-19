@@ -1,5 +1,5 @@
-import { Request, Response, NextFunction } from 'express'
-import Joi from 'joi'
+import { Request, Response, NextFunction } from 'express';
+import Joi from 'joi';
 
 export default async (req: Request, res: Response, next: NextFunction) => {
   try {
@@ -7,13 +7,12 @@ export default async (req: Request, res: Response, next: NextFunction) => {
       name: Joi.string().trim().required(),
       category: Joi.string().trim().required(),
       currency: Joi.string().trim().required(),
-      price: Joi.number().required(),
-
+      price: Joi.number().required()
     });
 
-    const { error } = await client.validate(req.body, {abortEarly: false})
+    const { error } = await client.validate(req.body, { abortEarly: false });
 
-    if (error) throw error
+    if (error) throw error;
 
     return next();
   } catch (error) {
@@ -22,6 +21,6 @@ export default async (req: Request, res: Response, next: NextFunction) => {
         name: detail.path.join('.'),
         description: detail.message
       }))
-    })
+    });
   }
-}
+};

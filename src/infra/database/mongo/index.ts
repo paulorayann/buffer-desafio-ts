@@ -1,17 +1,17 @@
-import mongoose from 'mongoose'
+import mongoose from 'mongoose';
 
 class Database {
   constructor() {
-    this.connect()
+    this.connect();
   }
 
   connect() {
-    return mongoose.connect(process.env.MONGO_URL || 'mongodb://localhost:27017/buffer_challenge')
+    return mongoose.connect(process.env.MONGO_URL || 'mongodb://localhost:27017/buffer_challenge');
   }
 
   disconnect() {
-    return mongoose.connection.close()
+    return mongoose.connection.close();
   }
 }
 
-export default new Database().connect()
+export default new Database().connect();

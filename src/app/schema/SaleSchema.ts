@@ -1,6 +1,6 @@
-import {ISale} from '../interfaces/SaleInterface'
-import { Schema, model, PaginateModel  } from 'mongoose'
-import mongoosePaginate from 'mongoose-paginate-v2'
+import { ISale } from '../interfaces/SaleInterface';
+import { Schema, model, PaginateModel } from 'mongoose';
+import mongoosePaginate from 'mongoose-paginate-v2';
 
 const SaleSchema = new Schema<ISale>({
   client: { type: Schema.Types.ObjectId, trim: true, required: true, ref: 'Client' },
@@ -12,14 +12,14 @@ const SaleSchema = new Schema<ISale>({
       qtd: { type: Number, trim: true, required: true },
       unitValue: { type: Number, trim: true, required: true },
       _id: false
-    },
+    }
   ],
   total: { type: Number },
   totalClient: { type: Number },
   __v: { type: Number, select: false }
-})
+});
 
-SaleSchema.plugin(mongoosePaginate)
+SaleSchema.plugin(mongoosePaginate);
 
-const Sale = model<ISale, PaginateModel<ISale>>('Sale', SaleSchema)
-export default Sale
+const Sale = model<ISale, PaginateModel<ISale>>('Sale', SaleSchema);
+export default Sale;

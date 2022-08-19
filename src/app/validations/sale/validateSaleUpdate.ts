@@ -1,9 +1,9 @@
-import { Request, Response, NextFunction } from 'express'
-import JoiImport from 'joi'
-import DateExtension from '@joi/date'
-import {objectId}  from '../../utils/regex'
+import { Request, Response, NextFunction } from 'express';
+import JoiImport from 'joi';
+import DateExtension from '@joi/date';
+import { objectId } from '../../utils/regex';
 
-const Joi = JoiImport.extend(DateExtension) as typeof JoiImport
+const Joi = JoiImport.extend(DateExtension) as typeof JoiImport;
 
 export default async (req: Request, res: Response, next: NextFunction) => {
   try {
@@ -15,16 +15,16 @@ export default async (req: Request, res: Response, next: NextFunction) => {
         Joi.object({
           product: Joi.string().regex(objectId).message('Please enter a valid Product ID format').trim(),
           qtd: Joi.number(),
-          unitValue: Joi.number(),
+          unitValue: Joi.number()
         })
       ),
       total: Joi.number(),
-      totalClient: Joi.number(),
+      totalClient: Joi.number()
     });
 
-    const { error } = await client.validate(req.body, {abortEarly: false})
+    const { error } = await client.validate(req.body, { abortEarly: false });
 
-    if (error) throw error
+    if (error) throw error;
 
     return next();
   } catch (error) {
@@ -33,6 +33,6 @@ export default async (req: Request, res: Response, next: NextFunction) => {
         name: detail.path.join('.'),
         description: detail.message
       }))
-    })
+    });
   }
-}
+};

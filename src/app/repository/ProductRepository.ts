@@ -1,13 +1,13 @@
-import { IProduct } from "../interfaces/ProductInterface";
-import ProductSchema from '../schema/ProductSchema'
+import { IProduct } from '../interfaces/ProductInterface';
+import ProductSchema from '../schema/ProductSchema';
 
 class ProductRepository {
   async create(payload: IProduct): Promise<IProduct> {
-    return ProductSchema.create(payload)
+    return ProductSchema.create(payload);
   }
 
   async findAll(payload): Promise<IProduct[]> {
-    const { limit = 15, page = 0, ...query } = payload
+    const { limit = 15, page = 0, ...query } = payload;
     const customLabels = {
       totalDocs: 'totalCount',
       docs: 'products',
@@ -20,30 +20,29 @@ class ProductRepository {
       meta: false,
       hasPrevPage: false,
       hasNextPage: false
-    }
+    };
     const options = {
       page: Number(page),
       limit: Number(limit),
-      customLabels,
-    }
-    return ProductSchema.paginate(query, options) as never as IProduct[]
+      customLabels
+    };
+    return ProductSchema.paginate(query, options) as never as IProduct[];
   }
 
   async findById(id: string): Promise<IProduct> {
-    const result = await ProductSchema.findById(id) as IProduct
-    return result
-
+    const result = (await ProductSchema.findById(id)) as IProduct;
+    return result;
   }
 
   async delete(id: string): Promise<IProduct> {
-    const result = (await ProductSchema.findByIdAndDelete(id)) as IProduct
-    return result
+    const result = (await ProductSchema.findByIdAndDelete(id)) as IProduct;
+    return result;
   }
 
   async update(id: string, payload: IProduct): Promise<IProduct> {
-    const result = (await ProductSchema.findByIdAndUpdate(id, payload, {returnOriginal: false})) as IProduct
-    return result
+    const result = (await ProductSchema.findByIdAndUpdate(id, payload, { returnOriginal: false })) as IProduct;
+    return result;
   }
 }
 
-export default new ProductRepository
+export default new ProductRepository();

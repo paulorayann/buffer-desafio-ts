@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 function cpfValidation(cpf) {
   if (typeof cpf !== 'string') return false;
   cpf = cpf.replace(/[^\d]+/g, '');

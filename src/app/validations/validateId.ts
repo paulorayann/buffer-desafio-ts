@@ -1,6 +1,6 @@
-import { Request, Response, NextFunction } from 'express'
-import Joi from 'joi'
-import {objectId}  from '../utils/regex'
+import { Request, Response, NextFunction } from 'express';
+import Joi from 'joi';
+import { objectId } from '../utils/regex';
 
 export default async (req: Request, res: Response, next: NextFunction) => {
   try {
@@ -8,9 +8,9 @@ export default async (req: Request, res: Response, next: NextFunction) => {
       id: Joi.string().regex(objectId).message('Please enter a valid ID').required()
     });
 
-    const { error } = await id.validate(req.params, {abortEarly: false})
+    const { error } = await id.validate(req.params, { abortEarly: false });
 
-    if (error) throw error
+    if (error) throw error;
 
     return next();
   } catch (error) {
@@ -19,6 +19,6 @@ export default async (req: Request, res: Response, next: NextFunction) => {
         name: detail.path.join('.'),
         description: detail.message
       }))
-    })
+    });
   }
-}
+};

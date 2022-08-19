@@ -40,7 +40,7 @@ class ProductRepository {
     return result
   }
 
-  async update(id: string, payload: Request): Promise<IProduct> {
+  async update(id: string, payload: IProduct): Promise<IProduct> {
     const result = (await ProductSchema.findByIdAndUpdate(id, payload, {returnOriginal: false})) as IProduct
     return result
   }

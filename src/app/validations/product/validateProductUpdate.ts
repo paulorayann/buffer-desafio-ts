@@ -7,7 +7,7 @@ export default async (req: Request, res: Response, next: NextFunction) => {
       name: Joi.string().trim(),
       category: Joi.string().trim(),
       currency: Joi.string().trim(),
-      price: Joi.string().trim(),
+      price: Joi.number(),
 
     });
 

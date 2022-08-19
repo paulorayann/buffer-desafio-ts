@@ -22,7 +22,7 @@ class ProductService {
     return result
   }
 
-  async update(id: string, payload: Request): Promise<IProduct> {
+  async update(id: string, payload: IProduct): Promise<IProduct> {
     const result = (await ProductRepository.update(id, payload)) as IProduct
     return result
   }

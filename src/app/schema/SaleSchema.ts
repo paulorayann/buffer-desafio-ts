@@ -2,8 +2,6 @@ import {ISale} from '../interfaces/SaleInterface'
 import { Schema, model, PaginateModel  } from 'mongoose'
 import mongoosePaginate from 'mongoose-paginate-v2'
 
-
-
 const SaleSchema = new Schema<ISale>({
   client: { type: Schema.Types.ObjectId, trim: true, required: true, ref: 'Client' },
   clientCurrency: { type: String, trim: true, required: true },
@@ -18,6 +16,7 @@ const SaleSchema = new Schema<ISale>({
   ],
   total: { type: Number },
   totalClient: { type: Number },
+  __v: { type: Number, select: false }
 })
 
 SaleSchema.plugin(mongoosePaginate)

@@ -14,5 +14,6 @@ export interface ISale {
   product: Types.ObjectId,
   total: number,
   totalClient: number,
-  _id?: Types.ObjectId;
+  _id?: Types.ObjectId,
+  __v?: number,
 }

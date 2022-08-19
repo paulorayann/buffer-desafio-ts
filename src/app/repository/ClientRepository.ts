@@ -40,7 +40,7 @@ class ClientRepository {
     return result
   }
 
-  async update(id: string, payload: Request): Promise<IClient> {
+  async update(id: string, payload: IClient): Promise<IClient> {
     const result = (await ClientSchema.findByIdAndUpdate(id, payload, {returnOriginal: false})) as IClient
     return result
   }

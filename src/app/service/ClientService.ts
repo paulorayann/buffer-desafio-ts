@@ -31,7 +31,15 @@ class ClientService {
     return result
   }
 
-  async update(id: string, payload: Request): Promise<IClient> {
+  async update(id: string, payload: IClient): Promise<IClient> {
+
+    const cep = await SearchCEP.getCEP(payload.cep)
+    payload.address = cep.logradouro
+    payload.neighborhood = cep.bairro
+    payload.complement = cep.complemento
+    payload.city = cep.localidade
+    payload.uf = cep.uf
+
     const result = (await ClientRepository.update(id, payload)) as IClient
     return result
   }

@@ -8,13 +8,13 @@ import CurrencyValue from "../utils/currencyQuoteAPI/CurrencyValue";
 class SaleService {
   async create( payload: ISale): Promise<ISale> {
     // Check if client exists
-    const validClient = await ClientRepository.findById(payload.client as never as string)
+    const validClient = await ClientRepository.findById(payload.client as unknown as string)
     if (!validClient) {
       throw new Error(`Client Id '${payload.client}' not found`)
     }
 
     // Check if product exists
-    const validProduct = await ProductRepository.findById(payload.items[0].product as never as string)
+    const validProduct = await ProductRepository.findById(payload.items[0].product as unknown as string)
     if (!validProduct) {
       throw new Error(`Product Id '${payload.items[0].product}' not found`)
     }

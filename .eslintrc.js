@@ -12,7 +12,12 @@ module.exports = {
   plugins: ['@typescript-eslint', 'prettier'],
   extends: ['plugin:@typescript-eslint/recommended', 'prettier'],
   rules: {
-    'prettier/prettier': 'error',
+    'prettier/prettier': [
+      'error',
+      {
+        endOfLine: 'auto'
+      }
+    ],
     'class-methods-use-this': 'off',
     camelcase: 'off',
     'no-console': 'off',

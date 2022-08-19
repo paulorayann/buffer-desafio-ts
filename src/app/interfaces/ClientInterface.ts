@@ -13,5 +13,9 @@ export interface IClient {
   number: string,
   complement: string,
   neighborhood: string,
+  logradouro: string,
+  bairro: string,
+  complemento: string,
+  localidade: string,
   _id?: Types.ObjectId;
 }

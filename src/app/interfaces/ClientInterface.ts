@@ -18,4 +18,5 @@ export interface IClient {
   complemento: string,
   localidade: string,
   _id?: Types.ObjectId;
+  __v?: number;
 }

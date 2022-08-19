@@ -6,4 +6,5 @@ export interface IProduct {
   currency: string,
   price: number,
   _id?: Types.ObjectId;
+  __v?: number;
 }

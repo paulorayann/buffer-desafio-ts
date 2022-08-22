@@ -2,18 +2,19 @@ import { Request, Response, NextFunction } from 'express';
 import JoiImport from 'joi';
 import DateExtension from '@joi/date';
 import { objectId } from '../../utils/regex';
+import { invalidObjectIdMessage } from '../../utils/customMessages';
 
 const Joi = JoiImport.extend(DateExtension) as typeof JoiImport;
 
 export default async (req: Request, res: Response, next: NextFunction) => {
   try {
     const client = Joi.object({
-      client: Joi.string().regex(objectId).message('Please enter a valid Client ID format').trim(),
+      client: Joi.string().regex(objectId).message(invalidObjectIdMessage).trim(),
       clientCurrency: Joi.string().trim(),
       date: Joi.date().format('DD/MM/YYYY'),
       items: Joi.array().items(
         Joi.object({
-          product: Joi.string().regex(objectId).message('Please enter a valid Product ID format').trim(),
+          product: Joi.string().regex(objectId).message(invalidObjectIdMessage).trim(),
           qtd: Joi.number(),
           unitValue: Joi.number()
         })

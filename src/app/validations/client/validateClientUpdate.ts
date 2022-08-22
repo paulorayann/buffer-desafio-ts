@@ -30,7 +30,7 @@ export default async (req: Request, res: Response, next: NextFunction) => {
       uf: Joi.string().trim(),
       city: Joi.string().trim(),
       address: Joi.string().trim(),
-      number: Joi.number().required(),
+      number: Joi.number(),
       complement: Joi.string().trim(),
       neighborhood: Joi.string().trim()
     });

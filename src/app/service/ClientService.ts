@@ -1,6 +1,7 @@
 import { IClient } from '../interfaces/ClientInterface';
 import ClientRepository from '../repository/ClientRepository';
-import SearchCEP from '../utils/SearchCEP/SearchCEP';
+import SearchCEP from '../repository/SearchCEP';
+import NotFound from '../errors/NotFound';
 
 class ClientService {
   async create(payload: IClient): Promise<IClient> {
@@ -22,11 +23,17 @@ class ClientService {
 
   async findById(id: string): Promise<IClient> {
     const result = (await ClientRepository.findById(id)) as IClient;
+    if (!result) {
+      throw new NotFound(`Client ID ${id}`);
+    }
     return result;
   }
 
   async delete(id: string): Promise<IClient> {
     const result = (await ClientRepository.delete(id)) as IClient;
+    if (!result) {
+      throw new NotFound(`Client ID ${id}`);
+    }
     return result;
   }
 
@@ -39,6 +46,9 @@ class ClientService {
     payload.uf = cep.uf;
 
     const result = (await ClientRepository.update(id, payload)) as IClient;
+    if (!result) {
+      throw new NotFound(`Client ID ${id}`);
+    }
     return result;
   }
 }

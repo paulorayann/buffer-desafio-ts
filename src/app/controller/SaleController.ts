@@ -6,7 +6,7 @@ class SaleController {
       const result = await SaleService.create(req.body);
       return res.status(201).json(result);
     } catch (error) {
-      return res.status(400).json({ error: error.description, message: error.message });
+      return res.status(500).json({ error: error.description, message: error.message });
     }
   }
 
@@ -18,7 +18,7 @@ class SaleController {
       }
       return res.status(200).json(result);
     } catch (error) {
-      return res.status(400).json({ error: error.description, message: error.message });
+      return res.status(500).json({ error: error.description, message: error.message });
     }
   }
 
@@ -31,7 +31,7 @@ class SaleController {
       }
       return res.status(200).json(result);
     } catch (error) {
-      return res.status(400).json({ error: error.description, message: error.message });
+      return res.status(500).json({ error: error.description, message: error.message });
     }
   }
 
@@ -42,7 +42,7 @@ class SaleController {
       const result = await SaleService.update(id, payload);
       return res.status(200).json(result);
     } catch (error) {
-      return res.status(404).json({ error: error.description, message: error.message });
+      return res.status(500).json({ error: error.description, message: error.message });
     }
   }
 
@@ -53,9 +53,9 @@ class SaleController {
       if (!result) {
         return res.status(404).json({ message: 'Sale not found' });
       }
-      return res.status(204).json(result);
+      return res.status(204).send();
     } catch (error) {
-      return res.status(400).end();
+      return res.status(400).json(error);
     }
   }
 }

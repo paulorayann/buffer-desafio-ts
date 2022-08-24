@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import config from '../../../config/config';
 
 class Database {
   constructor() {
@@ -6,7 +7,7 @@ class Database {
   }
 
   connect() {
-    return mongoose.connect(process.env.MONGO_URL || 'mongodb://localhost:27017/buffer_challenge');
+    return mongoose.connect(process.env.MONGO_URL || `mongodb://${config.database.host}:27017/${config.database.name}`);
   }
 
   disconnect() {

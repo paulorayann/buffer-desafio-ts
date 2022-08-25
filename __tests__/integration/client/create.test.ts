@@ -2,8 +2,6 @@ import request from 'supertest';
 import App from '../../../src/app';
 import faker from 'faker-br';
 
-jest.setTimeout(100000);
-
 it('should be able to create a new Client', async () => {
   const createClient = await request(App).post('/api/v1/client').send({
     name: faker.name.firstName(),

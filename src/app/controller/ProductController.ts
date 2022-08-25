@@ -67,7 +67,7 @@ class ProductController {
       return res.status(204).send();
     } catch (error) {
       logger.log('error', 'Error deleting client');
-      return res.status(400).json(error);
+      return res.status(500).json(error);
     }
   }
 }

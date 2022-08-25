@@ -7,7 +7,7 @@ it('should get all Products', async () => {
   expect(listProducts.status).toBe(200);
 });
 
-it('should get all Products', async () => {
+it('should get product by id', async () => {
   const createProduct = await request(App).post('/api/v1/product').send({
     name: faker.name.firstName(),
     category: faker.name.firstName(),

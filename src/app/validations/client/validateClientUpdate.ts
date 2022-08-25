@@ -15,7 +15,7 @@ export default async (req: Request, res: Response, next: NextFunction) => {
       name: Joi.string().trim(),
       cpf: Joi.string()
         .trim()
-        .min(14)
+        .min(11)
         .max(14)
         .regex(cpfValid)
         .message(invalidCpfMessage)

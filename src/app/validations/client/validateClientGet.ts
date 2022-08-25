@@ -12,7 +12,7 @@ export default async (req: Request, res: Response, next: NextFunction) => {
   try {
     const client = Joi.object({
       name: Joi.string().trim(),
-      cpf: Joi.string().trim().min(14).max(14).regex(cpfValid).message(invalidCpfMessage),
+      cpf: Joi.string().trim().min(11).max(14).regex(cpfValid).message(invalidCpfMessage),
       birthday: Joi.date().format('DD/MM/YYYY'),
       email: Joi.string().email().trim(),
       password: Joi.string().trim().min(6),

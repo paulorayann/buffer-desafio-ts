@@ -3,7 +3,8 @@ import ClientSchema from '../schema/ClientSchema';
 
 class ClientRepository {
   async create(payload: IClient): Promise<IClient> {
-    return ClientSchema.create(payload);
+    const result = await ClientSchema.create(payload);
+    return result;
   }
 
   async findAll(payload): Promise<IClient[]> {
@@ -26,7 +27,8 @@ class ClientRepository {
       limit: Number(limit),
       customLabels
     };
-    return ClientSchema.paginate(query, options) as never as IClient[];
+    const result = (await ClientSchema.paginate(query, options)) as never as IClient[];
+    return result;
   }
 
   async findById(id: string): Promise<IClient> {

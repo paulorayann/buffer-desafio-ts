@@ -3,7 +3,8 @@ import SaleSchema from '../schema/SaleSchema';
 
 class SaleRepository {
   async create(payload: ISale): Promise<ISale> {
-    return SaleSchema.create(payload);
+    const result = await SaleSchema.create(payload);
+    return result;
   }
 
   async findAll(payload): Promise<ISale[]> {
@@ -26,7 +27,8 @@ class SaleRepository {
       limit: Number(limit),
       customLabels
     };
-    return SaleSchema.paginate(query, options) as never as ISale[];
+    const result = (await SaleSchema.paginate(query, options)) as never as ISale[];
+    return result;
   }
 
   async findById(id: string): Promise<ISale> {

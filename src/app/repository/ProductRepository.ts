@@ -3,7 +3,8 @@ import ProductSchema from '../schema/ProductSchema';
 
 class ProductRepository {
   async create(payload: IProduct): Promise<IProduct> {
-    return ProductSchema.create(payload);
+    const result = await ProductSchema.create(payload);
+    return result;
   }
 
   async findAll(payload): Promise<IProduct[]> {
@@ -26,7 +27,8 @@ class ProductRepository {
       limit: Number(limit),
       customLabels
     };
-    return ProductSchema.paginate(query, options) as never as IProduct[];
+    const result = (await ProductSchema.paginate(query, options)) as never as IProduct[];
+    return result;
   }
 
   async findById(id: string): Promise<IProduct> {

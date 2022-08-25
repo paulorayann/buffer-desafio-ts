@@ -1,4 +1,4 @@
-export const cpfValid = /^\d{3}\.\d{3}\.\d{3}-\d{2}$/;
+export const cpfValid = /^[0-9]{3}\.?[0-9]{3}\.?[0-9]{3}-?[0-9]{2}$/;
 
 export const cepValid = /^\d{5}-\d{3}$/;
 

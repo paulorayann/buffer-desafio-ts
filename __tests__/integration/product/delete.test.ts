@@ -10,7 +10,6 @@ it('should be able to delete a Product through the id', async () => {
     price: 30.0
   });
   const updateProduct = await request(App).delete(`/api/v1/product/${createProduct.body._id}`).send();
-  console.log(updateProduct.body);
   expect(updateProduct.status).toBe(204);
 });
 

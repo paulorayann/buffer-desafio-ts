@@ -2,7 +2,7 @@ import request from 'supertest';
 import App from '../../../src/app';
 import faker from 'faker-br';
 
-it('shoul get all clients', async () => {
+it('should get all clients', async () => {
   const getClients = await request(App).get('/api/v1/client');
   expect(getClients.status).toBe(200);
 });
